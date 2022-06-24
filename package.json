@@ -4,22 +4,34 @@
   "name": "goit-nodejs-hw-01",
   "version": "1.0.0",
   "description": "first node.js homework",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
-    "dev": "nodemon index",
-    "prepare": "husky install"
+    "prestart": "tsc",
+    "start": "node src/app.js",
+    "dev": "nodemon",
+    "lint": "eslint . --ext .ts",
+    "prepare": "husky install",
+    "format": "prettier --config .prettierrc src/**/*.ts --write"
   },
   "keywords": [],
   "author": "Kostiantyn Ochenash <ochenashk@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
     "eslint": ">=5.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
     "nodemon": "^2.0.18",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
   },
   "dependencies": {
     "uuid": "^8.3.2"

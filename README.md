@@ -13,8 +13,10 @@ code index.js
 code .gitignore
 
 yarn add -D nodemon prettier eslint
+yarn add -D typescript @types/node rimraf
 yarn create @eslint/config
 npx mrm@2 lint-staged # and remove package.lock
+yarn add -D eslint-config-prettier eslint-plugin-prettier
 ```
 
 ### Шаг 2
@@ -42,3 +44,10 @@ npx mrm@2 lint-staged # and remove package.lock
       получает тип выполняемого действия и необходимые аргументы. Функция
       вызывает соответствующий метод из файла contacts.js передавая ему
       необходимые аргументы.
+
+```json
+{
+  "build": "rimraf ./dist && tsc",
+  "start": "npm run build && node dist/app.js"
+}
+```
