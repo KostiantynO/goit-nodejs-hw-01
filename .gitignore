@@ -48,6 +48,9 @@ typings/
 *.tsbuildinfo
 build/
 screenshots/
+app.js
+contacts.js
+invokeAction.js
 
 # Optional npm cache directory
 .npm
