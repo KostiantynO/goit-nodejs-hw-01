@@ -5,17 +5,17 @@ import './db/contacts.json';
 
 const contactsPath = join(__dirname, './db/contacts.json');
 
-type NewContact = {
-  name: string;
-  email: string;
-  phone: string;
+export type NewContact = {
+  name: string | undefined;
+  email: string | undefined;
+  phone: string | undefined;
 };
 
-type Contact = {
-  id: string;
+export type Contact = {
+  id: string | undefined;
 } & NewContact;
 
-type Contacts = Contact[];
+export type Contacts = Contact[];
 
 /**
  * Replaces content in 'contacts' file with the new stringified array
@@ -24,7 +24,7 @@ const updateContacts = async (newContacts: Contacts) => {
   await fs.writeFile(contactsPath, JSON.stringify(newContacts));
 };
 
-export const listContacts = async () => {
+const listContacts = async () => {
   const contactsBuffer = await fs.readFile(contactsPath);
   const contacts: Contacts | undefined = await JSON.parse(
     contactsBuffer.toString()
@@ -32,7 +32,11 @@ export const listContacts = async () => {
   return !contacts ? [] : contacts;
 };
 
-export const addContact = async ({ name, email, phone }: NewContact) => {
+const addContact = async ({ name, email, phone }: NewContact) => {
+  if (!name || !email || !phone) {
+    throw new Error('addContact expects name, email and phone');
+  }
+
   const contacts = await listContacts();
 
   const newContact = { id: v4(), name, email, phone };
@@ -42,7 +46,11 @@ export const addContact = async ({ name, email, phone }: NewContact) => {
   return newContact;
 };
 
-export const getContactById = async (contactId: string) => {
+const getContactById = async (contactId?: string | number | undefined) => {
+  if (!contactId) {
+    throw new Error('contactId is required for getContactById!');
+  }
+
   const contacts = await listContacts();
 
   const stringId = contactId + '';
@@ -55,7 +63,11 @@ export const getContactById = async (contactId: string) => {
   return contact;
 };
 
-export const editContact = async ({ id, name, email, phone }: Contact) => {
+const editContact = async ({ id, name, email, phone }: Contact) => {
+  if (!id) {
+    throw new Error('editContact expects contactId');
+  }
+
   const contacts = await listContacts();
   const stringId = id + '';
   const idx = contacts.findIndex(contact => contact.id === stringId);
@@ -72,7 +84,11 @@ export const editContact = async ({ id, name, email, phone }: Contact) => {
   return updatedContact;
 };
 
-export const removeContact = async (id: string) => {
+const removeContact = async (id: string | undefined) => {
+  if (!id) {
+    throw new Error('removeContact expects contactId');
+  }
+
   const contacts = await listContacts();
   const removedContact = contacts.find(contact => contact.id === id);
 
@@ -84,4 +100,12 @@ export const removeContact = async (id: string) => {
   await updateContacts(newContacts);
 
   return removedContact;
+};
+
+export const contactsOperations = {
+  listContacts,
+  addContact,
+  getContactById,
+  editContact,
+  removeContact,
 };
