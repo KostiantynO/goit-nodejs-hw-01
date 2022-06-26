@@ -5,9 +5,11 @@
     "target": "ES6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "module": "CommonJS" /* Specify what module code is generated. */,
     "rootDir": "src",
+    "outDir": "dist",
+
+    "sourceMap": true,
 
     "moduleResolution": "Node",
-    "inlineSourceMap": true,
 
     "lib": ["ES2015"],
     "resolveJsonModule": true,

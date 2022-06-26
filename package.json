@@ -4,12 +4,12 @@
   "name": "goit-nodejs-hw-01",
   "version": "1.0.0",
   "description": "first node.js homework",
-  "main": "src/app.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "tsc",
-    "start": "node src/app.js",
     "dev": "nodemon",
+    "prestart": "tsc",
+    "start": "node dist/app.js",
     "lint": "eslint . --ext .ts",
     "prepare": "husky install",
     "format": "prettier --config .prettierrc src/**/*.ts --write"
@@ -22,7 +22,7 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
-    "eslint": ">=5.16.0",
+    "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.1",
@@ -38,7 +38,7 @@
     "uuid": "^8.3.2"
   },
   "lint-staged": {
-    "*.ts": "eslint --cache --fix",
-    "*.{ts,css,md}": "prettier --write"
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,css,md}": "prettier --config .prettierrc --write"
   }
 }

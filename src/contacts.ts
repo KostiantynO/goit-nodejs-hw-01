@@ -1,9 +1,8 @@
 import fs from 'fs/promises';
 import { join } from 'path';
 import { v4 } from 'uuid';
-import './db/contacts.json';
 
-const contactsPath = join(__dirname, './db/contacts.json');
+const contactsPath = join(__dirname, '../db/contacts.json');
 
 export type NewContact = {
   name: string | undefined;
